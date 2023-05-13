@@ -1,0 +1,28 @@
+1. get the current academic year from the site, this is done in the background, 
+  the user doesn't handle this.
+
+2. function that returns semester selection options for the current academic year
+get_semesters()
+
+3. function that returns category selection options for the selected semester
+get_categories(semester_id)
+
+4. function that returns download options for the selected category
+get_download_options(semester_id, category_id)
+
+5. function that returns data for the selected download option
+get_data(semester_id, category_id, download_option_id)
+
+6. function that returns the timetable given the above correct item ids
+get_timetable(semester_id, category_id, download_option_id, data_id)
+
+------------------------------------------------------------------------------
+
+supportive functions
+
+1. function that returns the current academic year
+get_current_academic_year()
+
+2. function to fetch data from the web given a url with paramters,
+  this function should have appropriate error handling techniques
+fetch_data(url)
