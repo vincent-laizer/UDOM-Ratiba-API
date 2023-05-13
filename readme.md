@@ -1,4 +1,4 @@
-# README: Ratiba Scraping Project
+# Ratiba Scraping Project
 
 ## Overview
 This project is designed to scrape data from the ratiba.udom.ac.tz website, which provides information about the academic schedules of the University of Dodoma in Tanzania. The scraped data includes the schedules of courses and other academic activities offered by the university.
