@@ -1,4 +1,4 @@
-# Ratiba Scraping Project
+# UDOM Ratiba API
 
 ## Overview
 This project is designed to scrape data from the ratiba.udom.ac.tz website, which provides information about the academic schedules of the University of Dodoma in Tanzania. The scraped data includes the schedules of courses and other academic activities offered by the university.
@@ -11,14 +11,14 @@ This project requires the following dependencies to be installed:
 - Beautiful Soup 4
 - Requests
 
-<!-- ## Installation
+## Installation
 To install the project, follow these steps:
-1. Clone the project repository to your local machine.
+<!-- 1. Clone the project repository to your local machine.
 2. Install the required dependencies using pip.
 3. Run the `scrape.py` script to scrape the data from ratiba.udom.ac.tz. -->
 
-<!-- ## Usage
-To use the project, simply run the `scrape.py` script. The script will scrape the data from the ratiba.udom.ac.tz website and save it to a CSV file named `ratiba.csv` in the project directory.
+## Usage
+<!-- To use the project, simply run the `scrape.py` script. The script will scrape the data from the ratiba.udom.ac.tz website and save it to a CSV file named `ratiba.csv` in the project directory.
 
 The `scrape.py` script can be customized to scrape specific data from the website by modifying the URL and the Beautiful Soup selectors used to parse the HTML. The script currently scrapes the following data:
 - Course codes and titles
