@@ -1,4 +1,4 @@
-import ratiba
+from ratiba import ratiba, utils
 import json
 
 # FL1 = 3666
@@ -8,6 +8,4 @@ import json
 # Auditorium = 3663 
 
 if __name__ == "__main__":
-  # get timetable for LRB 106
-  timetable = ratiba.get_timetable(venue_no=3688)
-  print(json.dumps(timetable, indent=2))
+  print(json.dumps(ratiba.get_semesters(), indent=2))

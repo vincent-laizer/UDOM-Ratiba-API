@@ -1,56 +1,83 @@
+""" ratiba core module """
+
 import requests
 from bs4 import BeautifulSoup
 import json
+from ratiba import utils
 
-def get_timetable(venue_no:int):
-  ''' Get timetable for a venue '''
-  # get data from udom servers
-  url = f"https://ratiba.udom.ac.tz/index.php/downloads/view?year=9&semester=3352&type=1&option=room&data[]={venue_no}"
-  response = requests.get(url)
+def get_semesters():
+    """ get semester options for the current academic year """
+    # get current academic year
+    academic_year = utils.get_current_academic_year()
 
-  # parse the resulting HTML
-  soup = BeautifulSoup(response.text, 'html.parser')
-  table = soup.find('table', {'class': 'table'})
-  rows = [[td.text.strip() for td in tr.find_all('td')] for tr in table.find_all('tr') if tr.find_all('td')]
+    # get data from udom servers
+    url = f"https://ratiba.udom.ac.tz/index.php/downloads/fetch-semesters?year={academic_year['id']}"
+    html_text = utils.fetch_data(url)
 
-  ratiba = []
-  days = {}
-  sessions = []
-  prev_day = rows[0][0]
+    print(html_text)
 
-  # create a custom json object i can work with
-  for index, row in enumerate(rows):
-    if str(row[0]) != '' and index != 0:
-        days["day"] = prev_day
-        days["sessions"] = sessions
-        prev_day = row[0]
+    # parse the resulting HTML
+    soup = BeautifulSoup(html_text, 'html.parser')
+    options = soup.find_all('option')[1:] # remove the first option
 
-        if index < len(rows)-1:
-            ratiba.append(days)
-            sessions = []
-            days = {}
+    semesters = []
+    for option in options:
+        semesters.append({
+            "id": option['value'],
+            "text": option.text
+        })
 
-    if str(row[1]) == "":
-        time = str(prev_time)
-    else:
-        time = str(row[1])
-        prev_time = row[1]
+    return semesters
 
-    start_time = time.split("-")[0].strip()
-    end_time = time.split("-")[1].strip()
+# def get_timetable(venue_no:int):
+#   ''' Get timetable for a venue '''
+#   # get data from udom servers
+#   url = f"https://ratiba.udom.ac.tz/index.php/downloads/view?year=9&semester=3352&type=1&option=room&data[]={venue_no}"
+#   response = requests.get(url)
 
-    sessions.append({
-        "start_time": start_time,
-        "end_time": end_time,
-        "course": row[2],
-        "venue": row[3],
-        "instructor": row[4],
-        "students": row[5]
-    })
+#   # parse the resulting HTML
+#   soup = BeautifulSoup(response.text, 'html.parser')
+#   table = soup.find('table', {'class': 'table'})
+#   rows = [[td.text.strip() for td in tr.find_all('td')] for tr in table.find_all('tr') if tr.find_all('td')]
 
-    if index == len(rows)-1:
-        days["day"] = prev_day
-        days["sessions"] = sessions
-        ratiba.append(days)
+#   ratiba = []
+#   days = {}
+#   sessions = []
+#   prev_day = rows[0][0]
 
-  return ratiba
+#   # create a custom json object i can work with
+#   for index, row in enumerate(rows):
+#     if str(row[0]) != '' and index != 0:
+#         days["day"] = prev_day
+#         days["sessions"] = sessions
+#         prev_day = row[0]
+
+#         if index < len(rows)-1:
+#             ratiba.append(days)
+#             sessions = []
+#             days = {}
+
+#     if str(row[1]) == "":
+#         time = str(prev_time)
+#     else:
+#         time = str(row[1])
+#         prev_time = row[1]
+
+#     start_time = time.split("-")[0].strip()
+#     end_time = time.split("-")[1].strip()
+
+#     sessions.append({
+#         "start_time": start_time,
+#         "end_time": end_time,
+#         "course": row[2],
+#         "venue": row[3],
+#         "instructor": row[4],
+#         "students": row[5]
+#     })
+
+#     if index == len(rows)-1:
+#         days["day"] = prev_day
+#         days["sessions"] = sessions
+#         ratiba.append(days)
+
+#   return ratiba
