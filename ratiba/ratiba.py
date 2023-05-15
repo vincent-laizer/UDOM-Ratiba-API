@@ -124,7 +124,7 @@ def get_timetable(academic_year, semester, category, option, data):
         "start_time": start_time,
         "end_time": end_time,
         "course": row[2].split("-")[0].strip(),
-        "session_type": row[2].split("-")[1].strip(), # "Lecture" or "Tutorial"
+        "session_type": row[2].split("-")[1].strip(), # "Lecture", "Practical" or "Tutorial"
         "venue": row[3],
         "instructor": row[4],
         "students": [student.strip() for student in row[5].split(",")]
