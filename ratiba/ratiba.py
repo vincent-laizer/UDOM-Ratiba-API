@@ -5,16 +5,11 @@ from bs4 import BeautifulSoup
 import json
 from ratiba import utils
 
-def get_semesters():
+def get_semesters(academic_year):
     """ get semester options for the current academic year """
-    # get current academic year
-    academic_year = utils.get_current_academic_year()
-
     # get data from udom servers
     url = f"https://ratiba.udom.ac.tz/index.php/downloads/fetch-semesters?year={academic_year['id']}"
     html_text = utils.fetch_data(url)
-
-    print(html_text)
 
     # parse the resulting HTML
     soup = BeautifulSoup(html_text, 'html.parser')

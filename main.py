@@ -8,4 +8,5 @@ import json
 # Auditorium = 3663 
 
 if __name__ == "__main__":
-  print(json.dumps(ratiba.get_semesters(), indent=2))
+  curr_ac_yr = utils.get_current_academic_year()
+  print(json.dumps(ratiba.get_semesters(curr_ac_yr), indent=2))
