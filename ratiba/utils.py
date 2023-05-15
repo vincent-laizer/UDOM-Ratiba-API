@@ -3,11 +3,19 @@
 import requests
 from bs4 import BeautifulSoup
 
+def fetch_data(url:str):
+  """ fetch data from a given url with correct expeption handling"""
+  try:
+    response = requests.get(url)
+    return response.text
+  except requests.exceptions.ConnectionError:
+    print("Connection Error")
+    return None
+
 def get_current_academic_year():
   """ returns the current academic year (id and text) from scrapping the ratiba website """
   # Send a GET request to the URL and retrieve the HTML content
-  response = requests.get("https://ratiba.udom.ac.tz/index.php/downloads/index")
-  html_content = response.text
+  html_content = fetch_data("https://ratiba.udom.ac.tz/index.php/downloads/index")
 
   # Create a BeautifulSoup object to parse the HTML
   soup = BeautifulSoup(html_content, 'html.parser')
