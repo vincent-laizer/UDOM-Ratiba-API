@@ -45,6 +45,25 @@ def get_categories(academic_year, semester):
 
     return categories
 
+def get_download_options(academic_year, semester, category):
+    """ get download options for the current academic year, semester and category """
+    # get data from udom servers
+    url = f"https://ratiba.udom.ac.tz/index.php/downloads/opt?year={academic_year['id']}&semester={semester['id']}&type={category['id']}"
+    html_text = utils.fetch_data(url)
+
+    # parse the resulting HTML
+    soup = BeautifulSoup(html_text, 'html.parser')
+    options = soup.find_all('option')[1:] # remove the first option
+
+    download_options = []
+    for option in options:
+        download_options.append({
+            "id": option['value'],
+            "text": option.text
+        })
+
+    return download_options
+
 # def get_timetable(venue_no:int):
 #   ''' Get timetable for a venue '''
 #   # get data from udom servers

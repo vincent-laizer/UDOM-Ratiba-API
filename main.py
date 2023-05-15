@@ -8,7 +8,10 @@ import json
 # Auditorium = 3663 
 
 if __name__ == "__main__":
-  curr_ac_yr = utils.get_current_academic_year()
-  semesters = ratiba.get_semesters(curr_ac_yr)
-  # print(json.dumps(ratiba.get_semesters(curr_ac_yr), indent=2))
-  print(json.dumps((ratiba.get_categories(curr_ac_yr, semester)), indent=2))
+  academic_year = utils.get_current_academic_year()
+  semester = ratiba.get_semesters(academic_year)[2]
+  category = ratiba.get_categories(academic_year, semester)[0]
+  option = ratiba.get_download_options(academic_year, semester, category)[0]
+  # 0 - venue, 1 - course, 2 - programme, 3 - instructor
+  
+  # print(json.dumps(ratiba.get_semesters(academic_year), indent=2))
