@@ -9,4 +9,6 @@ import json
 
 if __name__ == "__main__":
   curr_ac_yr = utils.get_current_academic_year()
-  print(json.dumps(ratiba.get_semesters(curr_ac_yr), indent=2))
+  semesters = ratiba.get_semesters(curr_ac_yr)
+  # print(json.dumps(ratiba.get_semesters(curr_ac_yr), indent=2))
+  print(json.dumps((ratiba.get_categories(curr_ac_yr, semester)), indent=2))
