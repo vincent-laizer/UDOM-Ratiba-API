@@ -30,8 +30,6 @@ def get_categories(academic_year, semester):
     url = f"https://ratiba.udom.ac.tz/index.php/downloads/fetch-categories?year={academic_year['id']}&semester={semester['id']}"
     html_text = utils.fetch_data(url)
 
-    print(html_text)
-
     # parse the resulting HTML
     soup = BeautifulSoup(html_text, 'html.parser')
     options = soup.find_all('option')[1:] # remove the first option
@@ -63,6 +61,27 @@ def get_download_options(academic_year, semester, category):
         })
 
     return download_options
+
+def get_data(academic_year, semester, category, option):
+    """ get data for the current academic year, semester, category and option """
+    # get data from udom servers
+    url = f"https://ratiba.udom.ac.tz/index.php/downloads/data?year={academic_year['id']}&semester={semester['id']}&type={category['id']}&option={option['id']}"
+    html_text = utils.fetch_data(url)
+
+    data = []
+
+    # parse the resulting HTML
+    soup = BeautifulSoup(html_text, 'html.parser')
+    options = soup.select('#data option')
+    for option in options:
+        value = option['value']
+        text = option.text.strip()
+        data.append({
+            "id": value,
+            "text": text
+        })
+
+    return data
 
 # def get_timetable(venue_no:int):
 #   ''' Get timetable for a venue '''

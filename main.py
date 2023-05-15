@@ -13,5 +13,5 @@ if __name__ == "__main__":
   category = ratiba.get_categories(academic_year, semester)[0]
   option = ratiba.get_download_options(academic_year, semester, category)[0]
   # 0 - venue, 1 - course, 2 - programme, 3 - instructor
-  
-  # print(json.dumps(ratiba.get_semesters(academic_year), indent=2))
+
+  print(json.dumps(ratiba.get_data(academic_year, semester, category, option), indent=2))
