@@ -12,6 +12,7 @@ if __name__ == "__main__":
   semester = ratiba.get_semesters(academic_year)[2]
   category = ratiba.get_categories(academic_year, semester)[0]
   option = ratiba.get_download_options(academic_year, semester, category)[0]
-  # 0 - venue, 1 - course, 2 - programme, 3 - instructor
+  # for option: 0 - venue, 1 - course, 2 - programme, 3 - instructor
+  data = ratiba.get_data(academic_year, semester, category, option)[0]
 
-  print(json.dumps(ratiba.get_data(academic_year, semester, category, option), indent=2))
+  print(json.dumps(ratiba.get_timetable(academic_year, semester, category, option, data), indent=2))
